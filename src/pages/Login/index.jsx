@@ -2,13 +2,19 @@ import React, {useState} from "react";
 import { Link, Redirect } from "react-router-dom";
 import {login, useAuth} from "../../auth";
 import { Button, Logo } from "../../components/Header/styles";
-import { Label, LoginBox, LoginLabel, MyInput, Wrapper } from "./styles";
+import { IconVisibility, Label, LoginBox, LoginLabel, MyInput, Wrapper, WrapperPassword } from "./styles";
 import logo from "../../assets/logo-flask.png";
+import eye from "../../assets/eye.ico";
 
 function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [logged] = useAuth();
+  
+  function toggleVisibility(){
+    setShowPassword(!showPassword);
+  }
 
   const onSubmitClick = (e)=>{
     e.preventDefault()
@@ -40,7 +46,7 @@ function Login() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value)
   }
-
+  
   return (
     <Wrapper>
       {!logged?
@@ -58,12 +64,16 @@ function Login() {
               value={username} 
             />
             <Label>Password</Label>
-            <MyInput
-              type="password"
-              placeholder="Password"
-              onChange={handlePasswordChange}
-              value={password}
-            />
+            <WrapperPassword>
+              <MyInput
+                type={showPassword ? "text": "password"}
+                placeholder="Password"
+                onChange={handlePasswordChange}
+                value={password}
+              >
+              </MyInput>
+              <IconVisibility onClick={toggleVisibility} eye={eye}></IconVisibility>
+            </WrapperPassword>
             <Button onClick={onSubmitClick} type="submit">
               Log in
             </Button>

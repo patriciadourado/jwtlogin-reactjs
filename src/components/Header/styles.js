@@ -40,7 +40,7 @@ export const Button = styled.button`
       font-size: 20rem;
       padding: 8rem 8rem;
       background-color: #f91c24;
-      position: fixed;
+      position: absolute;
       right: 20rem;
       top: 2rem;
     `};
@@ -48,10 +48,9 @@ export const Button = styled.button`
     ${({ logout }) =>
     logout &&
     css`
-      font-size: 20rem;
+      font-size: 15rem;
       padding: 8rem 8rem;
       background-color: #f91c24;
-      position: fixed;
       right: 10rem;
       top: 1rem;
     `};

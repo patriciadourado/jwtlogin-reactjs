@@ -22,6 +22,28 @@ export const Wrapper = styled.form`
   }
 `;
 
+export const WrapperPassword = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+
+`;
+export const IconVisibility = styled.i`
+  position: absolute;
+  top: 38%;
+  right: 12%;
+  width: 22px;
+  height: 22px;
+  background-image: ${({ eye }) => `url(${eye})`};
+  display:inline-block;
+  
+  &:hover { 
+    opacity: 0.5;
+    cursor: pointer;
+  }
+`;
+
 export const LoginBox = styled.section`
   justify-content: center;
   width: 350rem;

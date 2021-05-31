@@ -6,7 +6,7 @@ export const WrapperSecret =  styled.header`
 `;
 
 export const Tag = styled.h2`
-  display: inline-block;
+  display: flex;
   font-size: 40rem;
   height: auto;
   letter-spacing: 2px;
@@ -16,6 +16,6 @@ export const Tag = styled.h2`
   
   @media(max-width: 800px){
     font-size: 15rem;
-    margin: 0 100rem 0 0;
+    margin: 0 80rem 0 0;
   }
 `;
