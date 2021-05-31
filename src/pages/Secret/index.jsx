@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { authFetch } from "../../auth";
+import { authFetch, logout } from "../../auth";
 import { Button } from "../../components/Header/styles";
-import { Tag } from "./styles";
+import { Tag, WrapperSecret } from "./styles";
 
 function Secret() {
   const [message, setMessage] = useState('')
@@ -21,12 +20,10 @@ function Secret() {
     })
   }, [])
   return (
-    <>
+    <WrapperSecret>
       <Tag>Secret: {message}</Tag>
-      <Link to="/">
-        <Button>Home</Button>
-      </Link>
-    </>
+      <Button logout onClick={() => logout()}>Logout</Button>
+    </WrapperSecret>
   )
 }
 

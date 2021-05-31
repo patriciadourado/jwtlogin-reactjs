@@ -1,28 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { logout, useAuth } from "../../auth";
+import { Link, Redirect } from "react-router-dom";
+import { useAuth } from "../../auth";
+import { MyHeader, Button, Logo } from './styles';
+import logo from "../../assets/logo-flask.png";
 
-import { MyHeader, Wrapper, Button } from './styles';
 
 function Header(){
   const [logged] = useAuth();
   
   return(
     <MyHeader>
-      <Wrapper>
-        {!logged?
-          <Link to="/login">
-            <Button>Login</Button>
-          </Link>
-        :
-        <> 
-          <Link to="/secret">
-            <Button secret>Secret</Button>
-          </Link>
-          <Button logout onClick={() => logout()}>Logout</Button>
-        </>
-        }
-      </Wrapper>
+      <Link to="/">
+        <Logo logo={logo} title="Login"/>
+      </Link>
+      {!logged?
+        <Link to="/login">
+          <Button>Login</Button>
+        </Link>
+      :
+        <Redirect to="/secret" />
+      }
     </MyHeader>
   )
 }

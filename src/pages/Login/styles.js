@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../../components/Header/styles";
+import { Button, Logo } from "../../components/Header/styles";
 
 export const Wrapper = styled.form`
   padding: 66rem 10rem;
@@ -9,7 +9,11 @@ export const Wrapper = styled.form`
    width: 300rem;
    margin: 10rem 0 1rem 25rem; //CHUTEI HORRORES AQUI BICHO
   }
-
+  & ${Logo}{
+    justify-content: center;
+    display: flex;
+    margin: auto;
+  }
   @media(max-width: 800px){
     justify-content: center;
     & ${Button}{

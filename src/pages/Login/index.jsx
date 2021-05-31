@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
-import {login, useAuth, logout} from "../../auth";
-import { Button } from "../../components/Header/styles";
+import { Link, Redirect } from "react-router-dom";
+import {login, useAuth} from "../../auth";
+import { Button, Logo } from "../../components/Header/styles";
 import { Label, LoginBox, LoginLabel, MyInput, Wrapper } from "./styles";
+import logo from "../../assets/logo-flask.png";
 
 function Login() {
   const [username, setUsername] = useState('')
@@ -22,6 +23,7 @@ function Login() {
       .then(token => {
         if (token.access_token){
           login(token)
+          return <Redirect to="/secret" />;
         }
         else {
           alert("Please type in correct username/password");
@@ -43,6 +45,9 @@ function Login() {
     <Wrapper>
       {!logged?
         <>
+          <Link to="/">
+            <Logo logo={logo} />
+          </Link>
           <LoginLabel>Log-in</LoginLabel>
           <LoginBox>
             <Label>Username</Label>
@@ -65,12 +70,7 @@ function Login() {
           </LoginBox>
         </>
       : 
-      <> 
-        <Link to="/secret">
-          <Button secret>Secret</Button>
-        </Link>
-        <Button logout onClick={() => logout()}>Logout</Button>
-      </>
+        <Redirect to="/secret" />
       }
       </Wrapper>
   )

@@ -1,31 +1,29 @@
 import styled, { css } from "styled-components";
 
 export const MyHeader = styled.header`
-  background-color: #ffffff;
-  border-bottom: 4px solid #ffffff;
   padding: 20rem 30rem;
-  position: fixed;
-  width: 100%;
   z-index: 100;
-
+  display: flex;
+  justify-content: space-between;
   @media(max-width: 800px){
-    padding: 15rem 16rem;
+    padding: 15rem 15rem;
     max-height: 70px;
   }
 `;
 
-export const Wrapper = styled.div`
+export const Logo = styled.img`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media(max-width: 800px){
-    justify-content: center;
-  }
+  width: 100px;
+  height: 89px;
+  background-image: ${({ logo }) => `url(${logo})`};
+  background-position: center;
 `;
 
 export const Button = styled.button`
   position: relative;
+  margin-top: 15rem;
   padding: 12rem 30rem;
   background-color: #3a4042;
   color: #f5f5f5;
@@ -43,18 +41,19 @@ export const Button = styled.button`
       padding: 8rem 8rem;
       background-color: #f91c24;
       position: fixed;
-      right: 20px;
-      top: 80px;
+      right: 20rem;
+      top: 2rem;
     `};
-
-  ${({ secret }) =>
-  secret &&
-  css`
-    font-size: 20rem;
-    padding: 8rem 8rem;
-    background-color: #009b14;
-    position: fixed;
-    right: 20px;
-    top: 20px;
-  `};
+  @media(max-width: 800px){
+    ${({ logout }) =>
+    logout &&
+    css`
+      font-size: 20rem;
+      padding: 8rem 8rem;
+      background-color: #f91c24;
+      position: fixed;
+      right: 10rem;
+      top: 1rem;
+    `};
+  }
 `;
