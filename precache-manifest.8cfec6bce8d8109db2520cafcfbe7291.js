@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0d2ae3a3560bd8bceba842e686e1f88b",
+    "revision": "dd4e3f327a1d20d2d8c7e1ffefe2ebc8",
     "url": "/jwtlogin-reactjs/index.html"
   },
   {
