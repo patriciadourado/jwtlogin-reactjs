@@ -11,7 +11,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [logged] = useAuth();
-  
+  const API_URL = process.env.REACT_APP_API_URL;
+
   function toggleVisibility(){
     setShowPassword(!showPassword);
   }
@@ -22,7 +23,7 @@ function Login() {
       'username': username,
       'password': password
     }
-    fetch('/api/login', {
+    fetch(API_URL+'/api/login', {
       method: 'post',
       body: JSON.stringify(opts)
     }).then(r => r.json())
@@ -52,7 +53,7 @@ function Login() {
       {!logged?
         <>
           <Link to="/">
-            <Logo logo={logo} />
+            <Logo logo={logo} src={logo} alt="Home" title="Home"/>
           </Link>
           <LoginLabel>Log-in</LoginLabel>
           <LoginBox>

@@ -11,7 +11,7 @@ function Header(){
   return(
     <MyHeader>
       <Link to="/">
-        <Logo logo={logo} title="Login"/>
+        <Logo src={logo} logo={logo} alt="Login"/>
       </Link>
       {!logged?
         <Link to="/login">
