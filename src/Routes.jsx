@@ -10,7 +10,20 @@ function Routes() {
   return (
     <HashRouter basename="/">
       <Route path="/" exact component={Home} />
-      <Route path="/login" component={Login} />
+      <Route path="/login" component={ ()=> 
+        (<Login 
+          buttonLabel="Log in" 
+          endpoint="/api/login"
+          messageError="Please type a correct username/password!"/>
+        )} 
+      />
+      <Route path="/registration" component={ ()=>
+      (<Login
+        buttonLabel="Register" 
+        endpoint="/api/registration"
+        messageError="Username already taken, try a new one!"/>
+        )}
+      />
       <PrivateRoute path="/secret" component={Secret} />
     </HashRouter>
   );

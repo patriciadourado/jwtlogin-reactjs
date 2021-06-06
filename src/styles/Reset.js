@@ -111,7 +111,7 @@ section {
 body {
   line-height: 1;
   font-family: "Roboto", sans-serif;
-  background-color: var(--color-black-dark);
+  background-color: var(--color-white);
 }
 ol,
 ul {

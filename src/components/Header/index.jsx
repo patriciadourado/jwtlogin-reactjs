@@ -14,9 +14,14 @@ function Header(){
         <Logo src={logo} logo={logo} alt="Login"/>
       </Link>
       {!logged?
-        <Link to="/login">
-          <Button>Login</Button>
-        </Link>
+        <>
+          <Link to="/registration">
+            <Button register>Register</Button>
+          </Link>
+          <Link to="/login">
+            <Button>Login</Button>
+          </Link>
+        </>
       :
         <Redirect to="/secret" />
       }

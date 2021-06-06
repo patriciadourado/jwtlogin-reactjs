@@ -25,34 +25,54 @@ export const Button = styled.button`
   position: relative;
   margin-top: 15rem;
   padding: 12rem 30rem;
-  background-color: #3a4042;
-  color: #f5f5f5;
-  border: 1px solid #f5f5f5;
+  background-color: var(--color-black-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
   border-radius: 4px;
   font-size: 20rem;
   cursor: pointer;
   text-decoration: none;
   overflow: hidden;
 
+
+  ${({ register }) =>
+    register &&
+    css`
+      background-color: var(--color-cyan-blue);
+    `};
+
   ${({ logout }) =>
     logout &&
     css`
       font-size: 20rem;
       padding: 8rem 8rem;
-      background-color: #f91c24;
+      background-color: var(--color-red);
       position: absolute;
       right: 20rem;
       top: 2rem;
     `};
   @media(max-width: 800px){
+    padding: 10rem 15rem;
+
     ${({ logout }) =>
     logout &&
     css`
       font-size: 15rem;
       padding: 8rem 8rem;
-      background-color: #f91c24;
+      background-color: var(--color-red);
       right: 10rem;
       top: 1rem;
+    `};
+    
+    ${({ register }) =>
+    register &&
+    css`
+      font-size: 20rem;
+      padding: 10rem 15rem;
+      position: relative;
+      right: 7rem;
+      margin-top: 15rem;
+      margin-left: 10rem;
     `};
   }
 `;

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import {login, useAuth} from "../../auth";
 import { Button, Logo } from "../../components/Header/styles";
@@ -6,13 +7,15 @@ import { IconVisibility, Label, LoginBox, LoginLabel, MyInput, Wrapper, WrapperP
 import logo from "../../assets/logo-flask.png";
 import eye from "../../assets/eye.ico";
 
-function Login() {
+function Login({ endpoint, buttonLabel, messageError }) {
+  const [showMessageError, setShowMessageError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(messageError);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [logged] = useAuth();
   const API_URL = process.env.REACT_APP_API_URL;
-
+  
   function toggleVisibility(){
     setShowPassword(!showPassword);
   }
@@ -23,23 +26,27 @@ function Login() {
       'username': username,
       'password': password
     }
-    fetch(API_URL+'/api/login', {
-      method: 'post',
-      body: JSON.stringify(opts)
-    }).then(r => r.json())
-      .then(token => {
-        if (token.access_token){
-          login(token)
-          return <Redirect to="/secret" />;
-        }
-        else {
-          alert("Please type in correct username/password");
-          setUsername('')
-          setPassword('')
-        }
-      })
+    if (!opts.username.trim() || !opts.password.trim()){
+      setErrorMessage("Enter a valid username and password!");
+      setShowMessageError(true);
+    }
+    else{
+      fetch(API_URL+endpoint, {
+        method: 'post',
+        body: JSON.stringify(opts)
+      }).then(r => r.json())
+        .then(token => {
+          if (token.access_token){
+            login(token)
+            return <Redirect to="/secret" />;
+          }
+          else {
+            setShowMessageError(true);
+          }
+        })
+    }
   }
-
+  
   const handleUsernameChange = (e) => {
     setUsername(e.target.value)
   }
@@ -55,7 +62,7 @@ function Login() {
           <Link to="/">
             <Logo logo={logo} src={logo} alt="Home" title="Home"/>
           </Link>
-          <LoginLabel>Log-in</LoginLabel>
+          <LoginLabel>{buttonLabel}</LoginLabel>
           <LoginBox>
             <Label>Username</Label>
             <MyInput 
@@ -63,6 +70,7 @@ function Login() {
               placeholder="Username" 
               onChange={handleUsernameChange}
               value={username} 
+              required
             />
             <Label>Password</Label>
             <WrapperPassword>
@@ -71,12 +79,16 @@ function Login() {
                 placeholder="Password"
                 onChange={handlePasswordChange}
                 value={password}
+                required
               >
               </MyInput>
               <IconVisibility onClick={toggleVisibility} eye={eye}></IconVisibility>
+              {showMessageError &&
+                <Label small>{errorMessage}</Label>
+              }
             </WrapperPassword>
             <Button onClick={onSubmitClick} type="submit">
-              Log in
+              {buttonLabel}
             </Button>
           </LoginBox>
         </>
@@ -87,4 +99,9 @@ function Login() {
   )
 }
 
+Login.propTypes = {
+  endpoint: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string.isRequired,
+  messageError: PropTypes.string.isRequired
+};
 export default Login;

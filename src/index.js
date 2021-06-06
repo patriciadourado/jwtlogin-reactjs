@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Reset from "./styles/Reset";
+import Colors from "./styles/settings/Colors";
 import Routes from "./Routes";
 
 ReactDOM.render(
   <React.StrictMode>
+    <Colors />
     <Reset />
 
     <Routes />

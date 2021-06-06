@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Button, Logo } from "../../components/Header/styles";
 
 export const Wrapper = styled.form`
@@ -7,7 +7,7 @@ export const Wrapper = styled.form`
 
   & ${Button}{
    width: 300rem;
-   margin: 10rem 0 1rem 25rem; //CHUTEI HORRORES AQUI BICHO
+   margin: 1rem 0 1rem 25rem; //CHUTEI HORRORES AQUI BICHO
   }
   & ${Logo}{
     justify-content: center;
@@ -59,19 +59,30 @@ export const LoginLabel = styled.h1`
   justify-content: center;
   margin: 10rem 0rem;
   font-size: 30rem;
-  color: black;
+  color: var(--color-black);
 `;
 
 export const Label = styled.label`
   font-size: 18rem;
   margin: 20rem 0 1rem 25rem;
-  color: #3a4042;
+  color: var(--color-black-dark);
   font-weight: 20px;
   text-align: justify;
   text-justify: center;
   @media(max-width: 800px){
     font-size: 15px;  
   }
+
+  ${({ small }) => 
+  small &&
+  css`
+    margin: 2rem 0 1rem 25rem;
+    font-size: 13rem;
+    color: var(--color-red);
+    font-weight: 12px;
+    text-align: justify;
+    text-justify: center;
+  `};
 `;
 
 export const MyInput = styled.input`
@@ -80,5 +91,5 @@ export const MyInput = styled.input`
   margin: 15rem 0 15rem 25rem;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: var(--color-input);
 `;
