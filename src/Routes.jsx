@@ -4,6 +4,7 @@ import { useAuth } from "./auth";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 import Secret from "./pages/Secret";
 
 function Routes() {
@@ -18,11 +19,10 @@ function Routes() {
         )} 
       />
       <Route path="/registration" component={ ()=>
-      (<Login
-        buttonLabel="Register" 
+      (<Registration
         endpoint="/api/registration"
-        messageError="Username already taken, try a new one!"/>
-        )}
+      />
+      )}
       />
       <PrivateRoute path="/secret" component={Secret} />
     </HashRouter>
