@@ -88,7 +88,7 @@ function Registration({ endpoint }) {
     || recipient.charAt(0) === "_" || recipient.charAt(recipient.length - 1) === "_"
     || recipient.charAt(0) === "+" || recipient.charAt(recipient.length - 1) === "+"
     ){
-      setEmailError('Invalid recipient name!');
+      setEmailError('Invalid recipient email name!');
       return false;
     }
     if(domain.charAt(0) === "." || domain.charAt(domain.length - 1) === "."
@@ -96,15 +96,15 @@ function Registration({ endpoint }) {
     || domain.charAt(0) === "_" || domain.charAt(domain.length - 1) === "_"
     || domain.charAt(0) === "+" || domain.charAt(domain.length - 1) === "+"
     ){
-      setEmailError('Invalid domain name!');
+      setEmailError('Invalid domain email name!');
       return false;
     }
     if(recipient.match(/\.\./)){//two consecutive dots on recipient part
-      setEmailError('Invalid recipient name, consecutive dots!');
+      setEmailError('Invalid recipient email name, consecutive dots!');
       return false;
     }
     if(domain.match(/\.\./)){//two consecutive dots on domain part
-      setEmailError('Invalid domain name, consecutive dots!');
+      setEmailError('Invalid domain email name, consecutive dots!');
       return false;
     }
     if(!recipient.match(/^[A-Za-z0-9!#%&`_=\\/$'*+?^{}|~.\-" ]+$/)){//invalid character on recipient part
@@ -128,24 +128,27 @@ function Registration({ endpoint }) {
       'username': username,
       'password': password
     }
-    // Validate Password
-    if(!validatePassword())
-      setShowPasswordError(true);
+    //Check if a Username is empty!
+    if (!opts.username.trim()){
+      setUsernameError("Enter a valid username!");
+      setShowUsernameError(true);
+    }
     else
-      setShowPasswordError(false);
-    
-      // Validate Email
+      setShowUsernameError(false);
+
+    // Validate Email
     if(!validateEmail())
       setShowEmailError(true);
     else
       setShowEmailError(false);
 
-      //Check if a Username is empty!
-    if (!opts.username.trim()){
-      setUsernameError("Enter a valid username!");
-      setShowUsernameError(true);
-    }
-    else{
+    //Validate Password
+    if(!validatePassword())
+      setShowPasswordError(true);
+    else
+      setShowPasswordError(false);
+    
+    if(opts.username.trim() && validateEmail() && validatePassword()){
       fetch(API_URL+endpoint, {
         method: 'post',
         body: JSON.stringify(opts)
@@ -162,7 +165,7 @@ function Registration({ endpoint }) {
         })
     }
   }
-  
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value)
   }
