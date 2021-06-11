@@ -7,7 +7,7 @@ export const Wrapper = styled.form`
 
   & ${Button}{
    width: 300rem;
-   margin: 1rem 0 1rem 25rem; //CHUTEI HORRORES AQUI BICHO
+   margin: 1rem 0 1rem 25rem;
   }
   & ${Logo}{
     justify-content: center;
@@ -31,7 +31,7 @@ export const WrapperPassword = styled.div`
 `;
 export const IconVisibility = styled.i`
   position: absolute;
-  top: 38%;
+  top: 22px;
   right: 12%;
   width: 22px;
   height: 22px;
@@ -63,32 +63,33 @@ export const LoginLabel = styled.h1`
 `;
 
 export const Label = styled.label`
-  font-size: 18rem;
+  font-size: 16rem;
   margin: 20rem 0 1rem 25rem;
   color: var(--color-black-dark);
   font-weight: 20px;
   text-align: justify;
   text-justify: center;
   @media(max-width: 800px){
-    font-size: 15px;  
+    font-size: 14px;  
   }
 
   ${({ small }) => 
   small &&
   css`
-    margin: 2rem 0 1rem 25rem;
-    font-size: 13rem;
+    margin: -9rem 0 10rem 25rem;
+    font-size: 14rem;
+    display: flex;
     color: var(--color-red);
     font-weight: 12px;
     text-align: justify;
-    text-justify: center;
+    /* text-justify: center; */
   `};
 `;
 
 export const MyInput = styled.input`
   width: 300rem;
   padding: 15rem;
-  margin: 15rem 0 15rem 25rem;
+  margin: 10rem 0 15rem 25rem;
   display: inline-block;
   border: none;
   background: var(--color-input);

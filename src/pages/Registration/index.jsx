@@ -49,23 +49,74 @@ function Registration({ endpoint }) {
       return false;
     }
     if(!password.match(/[A-Z]/)){
-      setPasswordError('The password must have at least 1 uppercase character!');
+      setPasswordError('Must have at least 1 uppercase character!');
       return false;
     }
     if(!password.match(/[0-9]/)){
-      setPasswordError('The password must have at least 1 numberic character!');
+      setPasswordError('Must have at least 1 numberic character!');
       return false;
     }
     if(!password.match(/[!@#$%^&?*]/)){
-      setPasswordError('The password must have at least 1 special character!');
+      setPasswordError('Must have at least 1 special character!');
       return false;
     }
     return true;
   }
 
   function validateEmail(){
-    if(!email.match(/[@.]/) || email.length < 4){//CHANGE REGEX, ITS NOT RIGHT
-      setEmailError('Enter a valid email address!');
+    if(!email){
+      setEmailError('Empty email, enter a valid email address!');
+      return false;
+    }
+    if(email.search("@") < 0){
+      setEmailError('Missing @, enter a valid email address!');
+      return false;
+    }
+    var recipient = email.substr(0, email.search("@"));
+    var domain = email.substr(email.search("@") + 1);
+    
+    if(recipient.length < 1 || recipient.length > 64){
+      setEmailError('Invalid recipient name, enter a valid email address!');
+      return false;
+    }
+    if(domain.length < 1 || domain.length > 253){
+      setEmailError('Invalid domain name, enter a valid email address!');
+      return false;
+    }
+    if(recipient.charAt(0) === "." || recipient.charAt(recipient.length - 1) === "."
+    || recipient.charAt(0) === "-" || recipient.charAt(recipient.length - 1) === "-"
+    || recipient.charAt(0) === "_" || recipient.charAt(recipient.length - 1) === "_"
+    || recipient.charAt(0) === "+" || recipient.charAt(recipient.length - 1) === "+"
+    ){
+      setEmailError('Invalid recipient name!');
+      return false;
+    }
+    if(domain.charAt(0) === "." || domain.charAt(domain.length - 1) === "."
+    || domain.charAt(0) === "-" || domain.charAt(domain.length - 1) === "-"
+    || domain.charAt(0) === "_" || domain.charAt(domain.length - 1) === "_"
+    || domain.charAt(0) === "+" || domain.charAt(domain.length - 1) === "+"
+    ){
+      setEmailError('Invalid domain name!');
+      return false;
+    }
+    if(recipient.match(/\.\./)){//two consecutive dots on recipient part
+      setEmailError('Invalid recipient name, consecutive dots!');
+      return false;
+    }
+    if(domain.match(/\.\./)){//two consecutive dots on domain part
+      setEmailError('Invalid domain name, consecutive dots!');
+      return false;
+    }
+    if(!recipient.match(/^[A-Za-z0-9!#%&`_=\\/$'*+?^{}|~.\-" ]+$/)){//invalid character on recipient part
+      setEmailError('Invalid recipient name, enter a valid email address!');  
+    return false;
+    }
+    if(!domain.match(/^[A-Za-z0-9.-]+$/)){//invalid character on domain part
+      setEmailError('Invalid domain name, enter a valid email address!');
+      return false;
+    }
+    if(!domain.match(/\./)){
+      setEmailError('Invalid top level email domain!');
       return false;
     }
     return true;
@@ -183,7 +234,6 @@ function Registration({ endpoint }) {
 }
 
 Registration.propTypes = {
-  endpoint: PropTypes.string.isRequired,
-  messageError: PropTypes.string.isRequired
+  endpoint: PropTypes.string.isRequired
 };
 export default Registration;
