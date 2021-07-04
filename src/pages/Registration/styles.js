@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const RegistrationBox = styled.section`
+export const RegistrationBox = styled.section`
   justify-content: center;
   width: 350rem;
   height: 400rem;
@@ -11,4 +11,18 @@ const RegistrationBox = styled.section`
 
 `;
 
-export default RegistrationBox;
+export const RegisterLabel = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin: 10rem 0rem;
+  padding-top: 10rem;
+  font-size: 30rem;
+  color: var(--color-black);
+`;
+
+export const Wrapper = styled.div`
+  padding-top: 30rem;
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+`;

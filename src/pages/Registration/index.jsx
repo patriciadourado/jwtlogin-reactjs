@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
-import {login, useAuth} from "../../auth";
+import { useAuth} from "../../auth";
 import { Button, Logo } from "../../components/Header/styles";
 import { 
   IconVisibility,
@@ -12,7 +12,7 @@ import {
   WrapperPassword } from "../Login/styles";
 import logo from "../../assets/logo-flask.png";
 import eye from "../../assets/eye.ico";
-import RegistrationBox from "./styles";
+import { RegistrationBox } from "./styles";
 
 function Registration({ endpoint }) {
   const [showUsernameError, setShowUsernameError] = useState(false);
@@ -30,6 +30,7 @@ function Registration({ endpoint }) {
   const [showPassword, setShowPassword] = useState(false);
   const [logged] = useAuth();
   const API_URL = process.env.REACT_APP_API_URL;
+  const [redirect, setRedirect] = useState(false);
   
   function toggleVisibility(){
     setShowPassword(!showPassword);
@@ -122,11 +123,12 @@ function Registration({ endpoint }) {
     return true;
   }
 
-  const onSubmitClick = (e)=>{
+  const onClickSubmit = (e)=>{
     e.preventDefault()
     let opts = {
       'username': username,
-      'password': password
+      'password': password,
+      'email': email
     }
     //Check if a Username is empty!
     if (!opts.username.trim()){
@@ -152,17 +154,15 @@ function Registration({ endpoint }) {
       fetch(API_URL+endpoint, {
         method: 'post',
         body: JSON.stringify(opts)
-      }).then(r => r.json())
-        .then(token => {
-          if (token.access_token){
-            login(token)
-            return <Redirect to="/secret" />;
+      }).then(response => {
+          if (response.status === 201){
+            setRedirect(true);
           }
           else {
             setUsernameError('Username already taken, try a new one!');
             setShowUsernameError(true);
           }
-        })
+        }).catch(err => console.log(err))
     }
   }
 
@@ -224,9 +224,10 @@ function Registration({ endpoint }) {
                 <Label small>{passwordError}</Label>
               }
             </WrapperPassword>
-            <Button onClick={onSubmitClick} type="submit">
+            <Button onClick={onClickSubmit} type="submit">
               Register
             </Button>
+            {redirect && <Redirect to="/sent" />}
           </RegistrationBox>
         </>
       : 
