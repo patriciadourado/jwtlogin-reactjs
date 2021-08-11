@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route, HashRouter } from "react-router-dom";
+import { Switch, Redirect, Route, BrowserRouter as Router } from "react-router-dom";
 import { useAuth } from "./auth";
 
 import Home from "./pages/Home";
@@ -10,7 +10,8 @@ import Secret from "./pages/Secret";
 
 function Routes() {
   return (
-      <HashRouter basename="/">
+    <Router basename={process.env.PUBLIC_URL}>
+      <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/login" component={ ()=> 
           (<Login 
@@ -28,7 +29,8 @@ function Routes() {
         <Route path="/sent" component={Sent} />
         <Route path="/finalize" component={Finalize} />
         <PrivateRoute path="/secret" component={Secret} />
-      </HashRouter>
+      </Switch>
+    </Router>
   );
 }
 
