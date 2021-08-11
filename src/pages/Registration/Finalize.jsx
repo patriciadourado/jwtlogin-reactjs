@@ -37,7 +37,7 @@ export function Finalize(){
     <Wrapper>
       <RegisterLabel>Welcome {user}!</RegisterLabel>
       <Link to="/">
-        <Button register>Enjoy!</Button>
+        <Button register>Enjoy The App!</Button>
       </Link>
     </Wrapper>
   );
