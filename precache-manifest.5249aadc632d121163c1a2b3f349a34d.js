@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "af19539f061a25452df28b8a2e0843dd",
+    "revision": "fd6a51f5baefc2f1a41d845e816f8ec4",
     "url": "/jwtlogin-reactjs/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jwtlogin-reactjs/static/js/2.c05cb18a.chunk.js"
   },
   {
-    "revision": "2aaeb103a1b80b87d0bf",
-    "url": "/jwtlogin-reactjs/static/js/main.cfcedca3.chunk.js"
+    "revision": "3e9494d5e92df4a46116",
+    "url": "/jwtlogin-reactjs/static/js/main.d13f1fd3.chunk.js"
   },
   {
     "revision": "4386f8cce98169d4db0a",
