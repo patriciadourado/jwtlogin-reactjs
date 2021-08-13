@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../../components/Header/styles';
 import { RegisterLabel, Wrapper } from './styles';
 import { login } from '../../auth';
 
 export function Finalize(){
   const API_URL = process.env.REACT_APP_API_URL;
-  const queryParams = new URLSearchParams(window.location.search);
+  const queryParams = new URLSearchParams(useLocation().search);
   const token = queryParams.get('token');
   const [user, setUser] = useState();
 
@@ -37,7 +37,7 @@ export function Finalize(){
     <Wrapper>
       <RegisterLabel>Welcome {user}!</RegisterLabel>
       <Link to="/">
-        <Button register>Enjoy The App!</Button>
+        <Button register>Enjoy the App!</Button>
       </Link>
     </Wrapper>
   );

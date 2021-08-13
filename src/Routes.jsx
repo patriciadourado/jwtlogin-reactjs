@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Redirect, Route, BrowserRouter as Router } from "react-router-dom";
+import { Redirect, Route, HashRouter } from "react-router-dom";
 import { useAuth } from "./auth";
 
 import Home from "./pages/Home";
@@ -10,27 +10,25 @@ import Secret from "./pages/Secret";
 
 function Routes() {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" component={ ()=> 
-          (<Login 
-            buttonLabel="Log in" 
-            endpoint="/api/login"
-            messageError="Please type a correct username/password!"/>
-          )} 
-        />
-        <Route path="/registration" component={ ()=>
-        (<Registration
-          endpoint="/api/registration"
-        />
-        )}
-        />
-        <Route path="/sent" component={Sent} />
-        <Route path="/finalize" component={Finalize} />
-        <PrivateRoute path="/secret" component={Secret} />
-      </Switch>
-    </Router>
+    <HashRouter basename={process.env.PUBLIC_URL}>
+      <Route path="/" exact component={Home} />
+      <Route path="/login" component={ ()=> 
+        (<Login 
+          buttonLabel="Log in" 
+          endpoint="/api/login"
+          messageError="Please type a correct username/password!"/>
+        )} 
+      />
+      <Route path="/registration" component={ ()=>
+      (<Registration
+        endpoint="/api/registration"
+      />
+      )}
+      />
+      <Route path="/sent" component={Sent} />
+      <Route path="/finalize" component={Finalize} />
+      <PrivateRoute path="/secret" component={Secret} />
+    </HashRouter>
   );
 }
 
