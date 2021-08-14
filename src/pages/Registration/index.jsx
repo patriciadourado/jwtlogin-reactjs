@@ -158,10 +158,15 @@ function Registration({ endpoint }) {
           if (response.status === 201){
             setRedirect(true);
           }
-          else {
+          else if(response.status === 303){
+            setEmailError('Email already registered, try a new one!');
+            setShowEmailError(true);
+          }
+          else{
             setUsernameError('Username already taken, try a new one!');
             setShowUsernameError(true);
           }
+
         }).catch(err => console.log(err))
     }
   }
