@@ -52,6 +52,13 @@ export const LoginBox = styled.section`
   align-items: center;
   padding-top: 25rem;
   box-shadow: 0rem 13rem 40rem -13rem rgba(0,0,0,0.75);
+  
+  ${({ reset }) =>
+    reset &&
+    css`
+      height: 200rem;
+      margin: 30rem auto;
+    `};
 `;
 
 export const LoginLabel = styled.h1`
@@ -69,21 +76,45 @@ export const Label = styled.label`
   font-weight: 20px;
   text-align: justify;
   text-justify: center;
+  
   @media(max-width: 800px){
     font-size: 14px;  
   }
 
   ${({ small }) => 
-  small &&
-  css`
-    margin: -9rem 0 10rem 25rem;
-    font-size: 14rem;
-    display: flex;
-    color: var(--color-red);
-    font-weight: 12px;
-    text-align: justify;
-    /* text-justify: center; */
+    small &&
+    css`
+      margin: -9rem 0 10rem 25rem;
+      font-size: 14rem;
+      display: flex;
+      color: var(--color-red);
+      font-weight: 12px;
+      text-align: justify;
+      /* text-justify: center; */
+
+      @media(max-width: 800px){
+        font-size: 12px;  
+      }
   `};
+
+  ${({ reset }) => 
+    reset &&
+    css`
+      margin: 2rem 0 5rem 25rem;
+      font-size: 11rem;
+      display: flex;
+      color: var(--color-cyan-blue);
+      font-weight: 12px;
+      text-align: justify;
+      cursor: pointer;
+      
+      &:hover{
+        text-decoration: underline;
+      }
+      @media(max-width: 800px){
+        font-size: 11px;  
+      }
+    `};
 `;
 
 export const MyInput = styled.input`
@@ -93,4 +124,10 @@ export const MyInput = styled.input`
   display: inline-block;
   border: none;
   background: var(--color-input);
+  
+  ${({ reset }) => 
+    reset &&
+    css`
+      margin: 16rem 0 5rem 25rem;
+  `};
 `;

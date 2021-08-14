@@ -28,7 +28,7 @@ export const Button = styled.button`
   background-color: var(--color-black-dark);
   color: var(--color-white);
   border: 1px solid var(--color-white);
-  border-radius: 4px;
+  border-radius: 40px;
   font-size: 20rem;
   cursor: pointer;
   text-decoration: none;
@@ -51,6 +51,17 @@ export const Button = styled.button`
       right: 20rem;
       top: 2rem;
     `};
+
+  ${({ reset }) =>
+    reset &&
+    css`
+      background-color: var(--color-fiery-rose);
+      top: 10rem;
+    `};
+  &:hover { 
+      opacity: 0.9;
+      cursor: pointer;
+    }
   @media(max-width: 800px){
     padding: 10rem 15rem;
 

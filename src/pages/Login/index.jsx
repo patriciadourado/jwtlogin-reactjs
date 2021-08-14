@@ -86,6 +86,9 @@ function Login({ endpoint, buttonLabel, messageError }) {
               {showMessageError &&
                 <Label small>{errorMessage}</Label>
               }
+              <Link to="/reset" style={{ textDecoration: 'none' }}>
+                <Label reset>Forgot Password?</Label>
+              </Link>
             </WrapperPassword>
             <Button onClick={onSubmitClick} type="submit">
               {buttonLabel}
