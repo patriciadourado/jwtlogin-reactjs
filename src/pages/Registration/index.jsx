@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import { useAuth} from "../../auth";
+import { validatePassword, validateEmail } from "../../utils/validation";
 import { Button, Logo } from "../../components/Header/styles";
 import { 
   IconVisibility,
@@ -22,7 +23,7 @@ function Registration({ endpoint }) {
   const [emailError, setEmailError] = useState('');
   
   const [showPasswordError, setShowPasswordError] = useState(false);
-  const [passwordError,setPasswordError ] = useState('');
+  const [passwordError, setPasswordError ] = useState('');
   
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -36,93 +37,6 @@ function Registration({ endpoint }) {
     setShowPassword(!showPassword);
   }
 
-  function validatePassword(){
-    if(password.length < 8){
-      setPasswordError('The password must have at least 8 characters!');
-      return false;
-    }
-    if(password.length > 30){
-      setPasswordError('The password must have maximum of 30 characters!');
-      return false;
-    }
-    if(!password.match(/[a-z]/)){
-      setPasswordError('The password must have at least 1 lowcase character!');
-      return false;
-    }
-    if(!password.match(/[A-Z]/)){
-      setPasswordError('Must have at least 1 uppercase character!');
-      return false;
-    }
-    if(!password.match(/[0-9]/)){
-      setPasswordError('Must have at least 1 numberic character!');
-      return false;
-    }
-    if(!password.match(/[!@#$%^&?*]/)){
-      setPasswordError('Must have at least 1 special character!');
-      return false;
-    }
-    return true;
-  }
-
-  function validateEmail(){
-    if(!email){
-      setEmailError('Empty email, enter a valid email address!');
-      return false;
-    }
-    if(email.search("@") < 0){
-      setEmailError('Missing @, enter a valid email address!');
-      return false;
-    }
-    var recipient = email.substr(0, email.search("@"));
-    var domain = email.substr(email.search("@") + 1);
-    
-    if(recipient.length < 1 || recipient.length > 64){
-      setEmailError('Invalid recipient name, enter a valid email address!');
-      return false;
-    }
-    if(domain.length < 1 || domain.length > 253){
-      setEmailError('Invalid domain name, enter a valid email address!');
-      return false;
-    }
-    if(recipient.charAt(0) === "." || recipient.charAt(recipient.length - 1) === "."
-    || recipient.charAt(0) === "-" || recipient.charAt(recipient.length - 1) === "-"
-    || recipient.charAt(0) === "_" || recipient.charAt(recipient.length - 1) === "_"
-    || recipient.charAt(0) === "+" || recipient.charAt(recipient.length - 1) === "+"
-    ){
-      setEmailError('Invalid recipient email name!');
-      return false;
-    }
-    if(domain.charAt(0) === "." || domain.charAt(domain.length - 1) === "."
-    || domain.charAt(0) === "-" || domain.charAt(domain.length - 1) === "-"
-    || domain.charAt(0) === "_" || domain.charAt(domain.length - 1) === "_"
-    || domain.charAt(0) === "+" || domain.charAt(domain.length - 1) === "+"
-    ){
-      setEmailError('Invalid domain email name!');
-      return false;
-    }
-    if(recipient.match(/\.\./)){//two consecutive dots on recipient part
-      setEmailError('Invalid recipient email name, consecutive dots!');
-      return false;
-    }
-    if(domain.match(/\.\./)){//two consecutive dots on domain part
-      setEmailError('Invalid domain email name, consecutive dots!');
-      return false;
-    }
-    if(!recipient.match(/^[A-Za-z0-9!#%&`_=\\/$'*+?^{}|~.\-" ]+$/)){//invalid character on recipient part
-      setEmailError('Invalid recipient name, enter a valid email address!');  
-    return false;
-    }
-    if(!domain.match(/^[A-Za-z0-9.-]+$/)){//invalid character on domain part
-      setEmailError('Invalid domain name, enter a valid email address!');
-      return false;
-    }
-    if(!domain.match(/\./)){
-      setEmailError('Invalid top level email domain!');
-      return false;
-    }
-    return true;
-  }
-
   const onClickSubmit = (e)=>{
     e.preventDefault()
     let opts = {
@@ -130,6 +44,9 @@ function Registration({ endpoint }) {
       'password': password,
       'email': email
     }
+    setEmailError(validateEmail(email));
+    setPasswordError(validatePassword(password));
+
     //Check if a Username is empty!
     if (!opts.username.trim()){
       setUsernameError("Enter a valid username!");
@@ -139,18 +56,18 @@ function Registration({ endpoint }) {
       setShowUsernameError(false);
 
     // Validate Email
-    if(!validateEmail())
+    if(emailError.length > 0 )
       setShowEmailError(true);
     else
       setShowEmailError(false);
 
     //Validate Password
-    if(!validatePassword())
+    if(passwordError.length > 0 )
       setShowPasswordError(true);
     else
       setShowPasswordError(false);
     
-    if(opts.username.trim() && validateEmail() && validatePassword()){
+    if(opts.username.trim() && !emailError.length && !passwordError.length){
       fetch(API_URL+endpoint, {
         method: 'post',
         body: JSON.stringify(opts)

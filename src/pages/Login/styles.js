@@ -96,6 +96,22 @@ export const Label = styled.label`
         font-size: 12px;  
       }
   `};
+    
+  ${({ error }) => 
+    error &&
+    css`
+      margin: 2rem 0 10rem 25rem;
+      font-size: 14rem;
+      display: flex;
+      color: var(--color-red);
+      font-weight: 12px;
+      text-align: justify;
+      /* text-justify: center; */
+
+      @media(max-width: 800px){
+        font-size: 12px;  
+      }
+  `};
 
   ${({ reset }) => 
     reset &&
