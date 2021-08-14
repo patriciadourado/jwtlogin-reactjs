@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/jwtlogin-reactjs/static/js/main.59eef499.chunk.js",
-    "main.js.map": "/jwtlogin-reactjs/static/js/main.59eef499.chunk.js.map",
+    "main.js": "/jwtlogin-reactjs/static/js/main.9a3ff404.chunk.js",
+    "main.js.map": "/jwtlogin-reactjs/static/js/main.9a3ff404.chunk.js.map",
     "runtime~main.js": "/jwtlogin-reactjs/static/js/runtime~main.91f2787d.js",
     "runtime~main.js.map": "/jwtlogin-reactjs/static/js/runtime~main.91f2787d.js.map",
-    "static/js/2.bd0b55a4.chunk.js": "/jwtlogin-reactjs/static/js/2.bd0b55a4.chunk.js",
-    "static/js/2.bd0b55a4.chunk.js.map": "/jwtlogin-reactjs/static/js/2.bd0b55a4.chunk.js.map",
+    "static/js/2.65b587fd.chunk.js": "/jwtlogin-reactjs/static/js/2.65b587fd.chunk.js",
+    "static/js/2.65b587fd.chunk.js.map": "/jwtlogin-reactjs/static/js/2.65b587fd.chunk.js.map",
     "index.html": "/jwtlogin-reactjs/index.html",
-    "precache-manifest.e82fb29efc70fe7cc7ba62a6fcf79d74.js": "/jwtlogin-reactjs/precache-manifest.e82fb29efc70fe7cc7ba62a6fcf79d74.js",
+    "precache-manifest.dca53d63483484787476b61d5cfe9fd2.js": "/jwtlogin-reactjs/precache-manifest.dca53d63483484787476b61d5cfe9fd2.js",
     "service-worker.js": "/jwtlogin-reactjs/service-worker.js",
     "static/media/eye.ico": "/jwtlogin-reactjs/static/media/eye.81f75af8.ico"
   }
