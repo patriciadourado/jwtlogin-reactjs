@@ -34,12 +34,16 @@ export const Button = styled.button`
   text-decoration: none;
   overflow: hidden;
 
+  &:hover { 
+    opacity: 0.9;
+    cursor: pointer;
+  }
 
   ${({ register }) =>
     register &&
     css`
       background-color: var(--color-cyan-blue);
-    `};
+  `};
 
   ${({ logout }) =>
     logout &&
@@ -50,40 +54,44 @@ export const Button = styled.button`
       position: absolute;
       right: 20rem;
       top: 2rem;
-    `};
+  `};
 
   ${({ reset }) =>
     reset &&
     css`
       background-color: var(--color-fiery-rose);
       top: 10rem;
-    `};
-  &:hover { 
-      opacity: 0.9;
-      cursor: pointer;
-    }
+  `};
+
+  ${({ change }) =>
+    change &&
+    css`
+      background-color: var(--color-very-green);
+      top: -9rem;
+  `};
+  
   @media(max-width: 800px){
     padding: 10rem 15rem;
 
     ${({ logout }) =>
-    logout &&
-    css`
-      font-size: 15rem;
-      padding: 8rem 8rem;
-      background-color: var(--color-red);
-      right: 10rem;
-      top: 1rem;
+      logout &&
+      css`
+        font-size: 15rem;
+        padding: 8rem 8rem;
+        background-color: var(--color-red);
+        right: 10rem;
+        top: 1rem;
     `};
     
     ${({ register }) =>
-    register &&
-    css`
-      font-size: 20rem;
-      padding: 10rem 15rem;
-      position: relative;
-      right: 7rem;
-      margin-top: 15rem;
-      margin-left: 10rem;
+      register &&
+      css`
+        font-size: 20rem;
+        padding: 10rem 15rem;
+        position: relative;
+        right: 7rem;
+        margin-top: 15rem;
+        margin-left: 10rem;
     `};
   }
 `;

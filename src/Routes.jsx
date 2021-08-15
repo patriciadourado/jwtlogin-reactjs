@@ -4,7 +4,7 @@ import { useAuth } from "./auth";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import { ResetPassword } from "./pages/Login/ResetPassword";
+import { Reset, ResetPassword } from "./pages/Login/ResetPassword";
 import Registration from "./pages/Registration";
 import { Finalize } from "./pages/Registration/Finalize";
 import Secret from "./pages/Secret";
@@ -30,6 +30,12 @@ function Routes() {
       (<ResetPassword
           buttonLabel="Reset Password"
           endpoint="/api/reset"
+          />
+        )}
+      /> 
+      <Route path="/new_password" component={()=> 
+      (<Reset
+          buttonLabel="New Password"
           />
         )}
       /> 
