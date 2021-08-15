@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import logo from "../../assets/logo-flask.png";
 import { Button, Logo } from '../../components/Header/styles';
 import { validateEmail } from '../../utils/validation';
@@ -10,6 +10,7 @@ export function ResetPassword({ buttonLabel, endpoint }){
     const [showEmailError, setShowEmailError] = useState(false);
     const [emailError, setEmailError] = useState('');
     const [email, setEmail] = useState('');
+    const [redirect, setRedirect] = useState(false);
     const API_URL = process.env.REACT_APP_API_URL;
 
     const handleEmailChange = (e) => {
@@ -41,9 +42,14 @@ export function ResetPassword({ buttonLabel, endpoint }){
                         showConfirmButton: false,
                         timer: 9000
                     })
+                    setRedirect(true);
                 }
                 else if(response.status === 404){
                     setEmailError('Email not registered in the system!');
+                    setShowEmailError(true);
+                }
+                else if(response.status === 403){
+                    setEmailError('Account not activated, check your email first!');
                     setShowEmailError(true);
                 }
             }).catch(err => console.log(err))
@@ -71,6 +77,7 @@ export function ResetPassword({ buttonLabel, endpoint }){
             <Button type="submit" onClick={onClickSubmit} reset>
               Submit
             </Button>
+            {redirect && <Redirect to="/" />}
             </LoginBox>
         </Wrapper>
     );
