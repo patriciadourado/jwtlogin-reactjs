@@ -63,7 +63,7 @@ export function ResetPassword({ buttonLabel, endpoint }){
             </Link>
             <LoginLabel>{buttonLabel}</LoginLabel>
             <LoginBox reset>
-                <Label>Enter your email address to continue</Label>
+                <Label>Enter your email address:</Label>
                 <MyInput 
                     type="text" 
                     placeholder="email address" 

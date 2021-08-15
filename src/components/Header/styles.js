@@ -30,6 +30,8 @@ export const Button = styled.button`
   border: 1px solid var(--color-white);
   border-radius: 40px;
   font-size: 20rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
   overflow: hidden;

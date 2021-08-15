@@ -4,7 +4,9 @@ import { Button, Logo } from "../../components/Header/styles";
 export const Wrapper = styled.form`
   padding: 66rem 10rem;
   background-color: white;
-
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  
   & ${Button}{
    width: 300rem;
    margin: 1rem 0 1rem 25rem;
@@ -86,6 +88,8 @@ export const Label = styled.label`
     css`
       margin: -9rem 0 10rem 25rem;
       font-size: 14rem;
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
       display: flex;
       color: var(--color-red);
       font-weight: 12px;
@@ -104,7 +108,9 @@ export const Label = styled.label`
       font-size: 14rem;
       display: flex;
       color: var(--color-red);
-      font-weight: 12px;
+      /* font-weight: 12px; */
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
       text-align: justify;
       /* text-justify: center; */
 
