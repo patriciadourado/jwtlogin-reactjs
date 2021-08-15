@@ -141,6 +141,9 @@ body {
   margin: 0;
   padding: 0;
 }
+.swal2-popup {
+  font-size: 16rem !important;
+}
 
 #root {
   min-height: calc(100vh - var(--bodyPaddingTop));

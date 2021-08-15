@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { ResetPassword } from "./pages/Login/ResetPassword";
 import Registration from "./pages/Registration";
-import { Finalize, Sent } from "./pages/Registration/Finalize";
+import { Finalize } from "./pages/Registration/Finalize";
 import Secret from "./pages/Secret";
 
 function Routes() {
@@ -33,7 +33,6 @@ function Routes() {
           />
         )}
       /> 
-      <Route path="/sent" component={Sent} />
       <Route path="/finalize" component={Finalize} />
       <PrivateRoute path="/secret" component={Secret} />
     </HashRouter>

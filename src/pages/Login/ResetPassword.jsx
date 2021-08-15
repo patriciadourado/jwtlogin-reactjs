@@ -4,6 +4,7 @@ import logo from "../../assets/logo-flask.png";
 import { Button, Logo } from '../../components/Header/styles';
 import { validateEmail } from '../../utils/validation';
 import { Label, LoginBox, LoginLabel, MyInput, Wrapper } from './styles';
+import Swal from 'sweetalert2';
 
 export function ResetPassword({ buttonLabel, endpoint }){
     const [showEmailError, setShowEmailError] = useState(false);
@@ -33,8 +34,13 @@ export function ResetPassword({ buttonLabel, endpoint }){
                 body: JSON.stringify(opts)
             }).then(response => {
                 if (response.status === 200){
-                    // Add modal message here
-                    alert('Email enviado!');
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        titleText: 'An email has been sent to '+email+' with further instructions.',
+                        showConfirmButton: false,
+                        timer: 9000
+                    })
                 }
                 else if(response.status === 404){
                     setEmailError('Email not registered in the system!');

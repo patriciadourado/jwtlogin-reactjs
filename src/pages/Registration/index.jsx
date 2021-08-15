@@ -14,6 +14,7 @@ import {
 import logo from "../../assets/logo-flask.png";
 import eye from "../../assets/eye.ico";
 import { RegistrationBox } from "./styles";
+import Swal from 'sweetalert2';
 
 function Registration({ endpoint }) {
   const [showUsernameError, setShowUsernameError] = useState(false);
@@ -73,6 +74,13 @@ function Registration({ endpoint }) {
         body: JSON.stringify(opts)
       }).then(response => {
           if (response.status === 201){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              titleText: 'A registration email has been sent to '+email+', please verify your e-mail to login!',
+              showConfirmButton: false,
+              timer: 9000
+            })
             setRedirect(true);
           }
           else if(response.status === 303){
@@ -149,7 +157,7 @@ function Registration({ endpoint }) {
             <Button onClick={onClickSubmit} type="submit">
               Register
             </Button>
-            {redirect && <Redirect to="/sent" />}
+            {redirect && <Redirect to="/" />}
           </RegistrationBox>
         </>
       : 

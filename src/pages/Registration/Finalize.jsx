@@ -43,15 +43,3 @@ export function Finalize(){
   );
 
 }
-
-export function Sent(){
-
-  return(
-    <Wrapper>
-      <RegisterLabel>Email sent, please verify your e-mail and login!</RegisterLabel>
-      <Link to="/">
-        <Button register>Back</Button>
-      </Link>
-    </Wrapper>
-  );
-}
