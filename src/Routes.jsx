@@ -36,6 +36,7 @@ function Routes() {
       <Route path="/new_password" component={()=> 
       (<Reset
           buttonLabel="New Password"
+          endpoint="/api/reset_finalize"
           />
         )}
       /> 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import logo from "../../assets/logo-flask.png";
 import eye from "../../assets/eye.ico";
 import { Button, Logo } from '../../components/Header/styles';
@@ -7,13 +7,13 @@ import { validateEmail, validatePassword } from '../../utils/validation';
 import { IconVisibility, Label, LoginBox, LoginLabel, MyInput, Wrapper, WrapperPassword } from './styles';
 import Swal from 'sweetalert2';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export function ResetPassword({ buttonLabel, endpoint }){
     const [showEmailError, setShowEmailError] = useState(false);
     const [emailError, setEmailError] = useState('');
     const [email, setEmail] = useState('');
-    const [redirect, setRedirect] = useState(false);
-    const API_URL = process.env.REACT_APP_API_URL;
-
+    const [redirect, setRedirect] = useState(false);    
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
     }
@@ -84,7 +84,7 @@ export function ResetPassword({ buttonLabel, endpoint }){
     );
 }
 
-export function Reset({ buttonLabel }){
+export function Reset({ buttonLabel, endpoint }){
     const [showMessageError1, setShowMessageError1] = useState(false);
     const [errorMessage1, setErrorMessage1] = useState('');
     const [showMessageError2, setShowMessageError2] = useState(false);
@@ -93,6 +93,9 @@ export function Reset({ buttonLabel }){
     const [password2, setPassword2] = useState('');
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+    const queryParams = new URLSearchParams(useLocation().search);
+    const token = queryParams.get('token');
     
     function toggleVisibility1(){
         setShowPassword1(!showPassword1);
@@ -109,7 +112,10 @@ export function Reset({ buttonLabel }){
 
     const onClickSubmit = (e)=>{
         e.preventDefault()
-        
+        let opts = {
+            'password': password1,
+            'token': token
+        }
         setErrorMessage1(validatePassword(password1));
         if(errorMessage1.length > 0){
             setShowMessageError1(true);
@@ -120,10 +126,34 @@ export function Reset({ buttonLabel }){
             setShowMessageError2(true);
         }
         else{
+            fetch(API_URL+endpoint, {
+                method: 'post',
+                body: JSON.stringify(opts)
+            }).then(response => {
+                if (response.status === 200){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        titleText: 'Your password has been changed!',
+                        showConfirmButton: false,
+                        timer: 9000
+                    })
+                    setRedirect(true);
+                }
+                else if(response.status === 500){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        titleText: 'Your password cannot be changed!',
+                        showConfirmButton: false,
+                        timer: 5000
+                    })
+                }
+            }).catch(err => console.log(err))
+
             setErrorMessage2('');
             setShowMessageError2(false);
         }
-
     }
     return(
         <Wrapper>
@@ -165,6 +195,7 @@ export function Reset({ buttonLabel }){
                 <Button type="submit" onClick={onClickSubmit} change>
                     Submit
                 </Button>
+                {redirect && <Redirect to="/" />}
             </LoginBox>
         </Wrapper>
     );
