@@ -17,6 +17,8 @@ export const RegisterLabel = styled.h1`
   margin: 10rem 0rem;
   padding-top: 10rem;
   font-size: 30rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
   color: var(--color-black);
 `;
 
