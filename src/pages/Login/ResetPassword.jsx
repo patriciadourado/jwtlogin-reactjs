@@ -6,6 +6,7 @@ import { Button, Logo } from '../../components/Header/styles';
 import { validateEmail, validatePassword } from '../../utils/validation';
 import { IconVisibility, Label, LoginBox, LoginLabel, MyInput, Wrapper, WrapperPassword } from './styles';
 import Swal from 'sweetalert2';
+import { login } from '../../auth';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -128,19 +129,25 @@ export function Reset({ buttonLabel, endpoint }){
         else{
             fetch(API_URL+endpoint, {
                 method: 'post',
+                headers: { 
+                    'Content-Type':'application/json',
+                    'Authorization': 'Bearer ' + token, 
+                  },
                 body: JSON.stringify(opts)
-            }).then(response => {
-                if (response.status === 200){
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        titleText: 'Your password has been changed!',
-                        showConfirmButton: false,
-                        timer: 9000
-                    })
-                    setRedirect(true);
-                }
-                else if(response.status === 500){
+            }).then(response => response.json())
+                .then(token2 => {
+                    if(token2.access_token){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            titleText: 'Your password has been changed!',
+                            showConfirmButton: false,
+                            timer: 9000
+                        })
+                        login(token2);    
+                        setRedirect(true);
+                    } 
+                else{
                     Swal.fire({
                         position: 'center',
                         icon: 'error',

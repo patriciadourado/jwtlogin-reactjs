@@ -139,7 +139,7 @@ function Registration({ endpoint }) {
             {showEmailError &&
               <Label small>{emailError}</Label>
             }
-            <Label>Password</Label>
+            <Label>Create Your Password</Label>
             <WrapperPassword>
               <MyInput
                 type={showPassword ? "text": "password"}

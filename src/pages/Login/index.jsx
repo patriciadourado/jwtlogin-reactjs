@@ -43,7 +43,7 @@ function Login({ endpoint, buttonLabel, messageError }) {
           else {
             setShowMessageError(true);
           }
-        })
+        }).catch(err => console.log(err))
     }
   }
   
